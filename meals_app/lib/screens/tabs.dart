@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meals_app/Auth/auth.dart';
 import 'package:meals_app/screens/filter_screen.dart';
 import 'package:meals_app/screens/meals.dart';
 import 'package:meals_app/screens/categories.dart';
@@ -42,6 +44,26 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }
   }
 
+  PageRouteBuilder _createRoute() {
+    return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 500),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const AuthScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutQuart;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(position: offsetAnimation, child: child);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final meals = ref.watch(mealsProvider);
@@ -76,13 +98,29 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(activeScreenTitle),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Future.delayed(const Duration(seconds: 1), () {
+                  FirebaseAuth.instance.signOut();
+                });
+
+                // ignore: use_build_context_synchronously
+                Navigator.pushReplacement(context, _createRoute());
+              },
+              icon: const Icon(Icons.logout_outlined))
+        ],
+        title: Text(
+          activeScreenTitle,
+          style: const TextStyle(fontWeight: FontWeight.w400),
+        ),
       ),
       drawer: SideDrawer(
         onSelectScreen: _setScreen,
       ),
       body: activeScreen,
       bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         items: const [

@@ -131,25 +131,30 @@ class _AuthScreenState extends State<AuthScreen> {
                     right: 30,
                   ),
                   child: Image.asset(
-                    'assets/images/message.png',
+                    'assets/images/user.png',
                   ),
                 ),
                 Card(
-                  elevation: 1,
+                  elevation: 5,
                   //  color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   child: Container(
                     decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 2,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 3),
+                              color: Theme.of(context).colorScheme.onPrimary)
+                        ],
                         gradient: LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomCenter,
                             colors: [
-                          Theme.of(context).colorScheme.primaryContainer,
-                          Theme.of(context)
-                              .colorScheme
-                              .primaryContainer
-                              .withOpacity(0.5),
-                        ])),
+                              Theme.of(context).colorScheme.primaryContainer,
+                              Theme.of(context).colorScheme.primaryContainer
+                            ])),
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/screens/meal_details.dart';
 import 'package:meals_app/widgets/meals_item.dart';
@@ -39,6 +40,11 @@ class FavouriteMealScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(
+              height: 120,
+              width: 120,
+              child: Lottie.asset('assets/animations/favourite_animation.json'),
+            ),
             Text(
               'Nothing to Eat',
               style: Theme.of(context)

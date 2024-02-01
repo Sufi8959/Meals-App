@@ -30,7 +30,7 @@ class CategoryGridItem extends StatelessWidget {
           category.title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
               ),
         ),
       ),

@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:meals_app/Auth/auth.dart';
 import 'package:meals_app/screens/filter_screen.dart';
-import 'package:meals_app/screens/meals.dart';
+import 'package:meals_app/screens/favourite_meals.dart';
 import 'package:meals_app/screens/categories.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 import 'package:meals_app/provider/meals_provider.dart';
@@ -99,6 +100,22 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          InkWell(
+            onTap: () {
+              Future.delayed(const Duration(seconds: 1), () {
+                FirebaseAuth.instance.signOut();
+              });
+
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(context, _createRoute());
+            },
+            // ignore: sized_box_for_whitespace
+            child: Container(
+              width: 35,
+              child: Lottie.asset('assets/animations/logout_animation.json'),
+            ),
+          ),
+          /*
           IconButton(
               onPressed: () {
                 Future.delayed(const Duration(seconds: 1), () {
@@ -108,7 +125,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
                 // ignore: use_build_context_synchronously
                 Navigator.pushReplacement(context, _createRoute());
               },
-              icon: const Icon(Icons.logout_outlined))
+              icon: const Icon(Icons.logout_outlined),) */
         ],
         title: Text(
           activeScreenTitle,

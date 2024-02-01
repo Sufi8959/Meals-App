@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:meals_app/screens/tabs.dart';
 import 'package:meals_app/widgets/image_picker.dart';
 
@@ -124,15 +125,13 @@ class _AuthScreenState extends State<AuthScreen> {
               children: [
                 // ignore: avoid_unnecessary_containers
                 Container(
-                  width: 200,
+                  width: 250,
                   margin: const EdgeInsets.only(
                     bottom: 20,
                     left: 30,
                     right: 30,
                   ),
-                  child: Image.asset(
-                    'assets/images/user.png',
-                  ),
+                  child: Lottie.asset('assets/animations/login_animation.json'),
                 ),
                 Card(
                   elevation: 5,
